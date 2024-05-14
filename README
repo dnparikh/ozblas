@@ -1,0 +1,112 @@
+OzBLAS 1.5 alpha 
+September 7, 2023
+Daichi Mukunoki, Takeshi Ogita, Katsuhisa Ozaki, Toshiyuki Imamura
+Contact: Daichi Mukunoki (daichi.mukunoki@riken.jp)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ATTENTION:
+Basically, this code is just intended to demonstrate our
+proposed methods presented in our papers. It is not
+recommended to use it in real applications. The behavior
+of our implementation may depend on the compiler
+(options) and the version of the libraries used
+internally. If you want to use it in real applications,
+please contact us.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+[Overview]
+Accurate and reproducible BLAS routines "OzBLAS" [3] based on Ozaki scheme [1]
+This version contains following routines:
+DOT, NRM2, GEMV, GEMM, AXPY, CSRMV, and CG solver (unpreconditioned) on single and double-precision for NVIDIA GPUs and CPUs.
+The Ozaki scheme is applied only to the inner product operations in the BLAS operation.
+The computation associated with scalar parameters (alpha and beta) are performed on the standard double-precision operation.
+The computation associated with scalar parameters and DAXPY are performed with fused-multiply-add (FMA).
+The CPU version uses CBLAS (MKL, OpenBLAS, etc.) for the internal computation.
+The GPU version uses NVIDIA cuBLAS for the internal computation.
+This code is an experimental alpha version. We do not guarantee the computation result. However, we welcome your feedback.
+
+[Requirements]
+libozblas.a:
+- GNU or Intel compiler
+- MKL or OpenBLAS
+libcuozblas.a:
+- CUDA and cuBLAS
+testing:
+- MPLAPACK (http://mplapack.sourceforge.net)
+-> For testing with MPFR and binary128
+- The GNU MPFR Library (https://www.mpfr.org)
+-> MPFR is included in MPLAPACK
+-> MPFR must be built with "--enable-float128" option for binary128
+-> MPLAPACK should be built with MPFR with binary128 support
+- BeBOP Sparse Matrix Converter (http://bebop.cs.berkeley.edu/smc/)
+-> For sparse matrix handling
+
+[Build]
+After modify make.inc and Makefiles in src and testing directories, execute make in the current directory.
+Also, modify testing_setting.h for testing.
+
+[Usage]
+See examples (with _quick_test.sh) in 'testing' directory.
+
+[Limitations]
+- CSRMV supports 32-bit indexing only.
+- incx and incy are not supported.
+
+[History]
+v1.5a02
+GEMV improved.
+
+v1.5a
+Demonstration of fast OzDOT using Dot2 [6].
+GPU version is included again.
+Bug fix (mainly in GEMV and mixed-precision implementations).
+Some minor updates.
+
+v1.4a
+Mixed-precision support [3] (partially).
+Binary128 support [5].
+CPU version has been updated with C++ template.
+Performance improvement of CPU version.
+GPU version is temporarily excluded.
+Bug fix.
+Some minor updates.
+
+v1.2a17
+Performance improvement of CPU implementation.
+Bug fix (previously, reproducibility was not ensured in some cases between CPU and GPU).
+Some minor updates.
+
+v1.2a
+Unpreconditioned CG solver is added [4].
+CSRMV for CPUs is added.
+Single-precision routines are added.
+Single-precision routines performed with double are added (partially).
+A critical bug in the vector splitting on the CPU implementation is fixed.
+Some minor updates.
+
+v1.1a04
+Scalar arguments (alpha and beta) are supported.
+CUBLAS_POINTER_MODE_DEVICE is supported.
+DNRM2 and DCSRMV for GPUs are added.
+OpenBLAS and NVBLAS are supported.
+Some bugs are fixed.
+
+v1.0a03
+First release.
+
+[Development notes]
+- Although the implementation is designed to be reproducible using pure floating-point sum (summode=0), reproducibility cannot be observed if the problem generation in the test routine is thread-parallelized.
+- NextPowTwo is non-reproducible between CPU and CUDA (more investigation is needed...)
+
+[Publications]
+[1] K. Ozaki, T. Ogita, S. Oishi, S. M. Rump: Error-free transformations of matrix multiplication by using fast routines of matrix multiplication and its applications, Numer. Algorithms, vol. 59, no. 1, pp. 95-118, 2012.
+[2] D. Mukunoki, T. Ogita, K. Ozaki: Accurate and Reproducible BLAS Routines with Ozaki Scheme for Many-core Architectures, Proc. 13th International Conference on Parallel Processing and Applied Mathematics (PPAM2019), LNCS, Vol. 12043, pp. 516-527, 2019.
+[3] D. Mukunoki, K. Ozaki, T. Ogita, T. Imamura: DGEMM using Tensor Cores, and Its Accurate and Reproducible Versions, Proc. ISC High Performance 2020, Lecture Notes in Computer Science, Vol. 12151, pp. 230-248, 2020.
+[4] D. Mukunoki, K. Ozaki, T. Ogita, R. Iakymchuk: Conjugate Gradient Solvers with High Accuracy and Bit-wise Reproducibility between CPU and GPU using Ozaki scheme, Proc. The International Conference on High Performance Computing in Asia-Pacific Region (HPCAsia 2021), pp. 100-109, 2021.
+[5] D. Mukunoki, K. Ozaki, T. Ogita, T. Imamura, Accurate Matrix Multiplication on Binary128 Format Accelerated by Ozaki Scheme, Proc. The 50th International Conference on Parallel Processing (ICPP-2021), No. 78, pp. 1-11, 2021.
+[6] D. Mukunoki, K. Ozaki, T. Ogita, T. Imamura, Infinite-precision Inner Product and Sparse Matrix Vector Multiplication using Ozaki Scheme with Dot2 on Many-core Processors, Proc. 14th International Conference on Parallel Processing and Applied Mathematics (PPAM 2022), LNCS, Vol 13826, pp. 40-54, 2023.
+
+[Acknowledgement]
+The development of this software was supported by grant numbers #19K20286 and #20KK0259 from the Grants-in-Aid for Scientific Research Program (KAKENHI) of the Japan Society for the Promotion of Science (JSPS).
+
+
