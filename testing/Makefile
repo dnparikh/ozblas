@@ -12,8 +12,8 @@ ifneq ($(CXX),FCC)
 FLAGS	:= -Wall -Wno-unused-but-set-variable 
 endif
 FLAGS	+= -O2 -MD 
-INCS	+= -I$(INC_PATH) -I../include
-LDFLAGS += -L$(LIB_PATH) -L../lib
+INCS	+= $(INC_PATH) -I../include
+LDFLAGS += $(LIB_PATH) -L../lib
 
 # -------------------------------------------
 ifeq ($(CUDA),yes)
@@ -50,7 +50,8 @@ endif
 ifeq ($(CPU_BLAS),OpenBLAS)
 FLAGS	+= -DOpenBLAS
 ifeq ($(LINKAGE),static)
-LIBS	+= -Wl,-Bstatic,-lopenblas
+#LIBS	+= -Wl,-Bstatic,-lopenblas
+LIBS	+= -Wl,-Bstatic,-lblis
 else
 LIBS	+= -lopenblas
 endif

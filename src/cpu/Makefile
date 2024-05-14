@@ -6,7 +6,7 @@ LIB		:= ../../lib/libozblas.a
 ifneq ($(CXX),FCC)
 FLAGS	:= -Wall -Wno-maybe-uninitialized
 endif
-FLAGS   += -MD -O3 -fPIC -I$(INC_PATH) 
+FLAGS   += -MD -O3 -fPIC $(INC_PATH) 
 
 #--------------------
 # ARCH and COMPILER

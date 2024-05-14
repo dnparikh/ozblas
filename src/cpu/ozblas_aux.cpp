@@ -145,6 +145,14 @@ void ozblasPrintVec (
 	}
 }
 
+
+trans_t ToblisOp (const char tran) {
+    if (tran == 'N' || tran == 'n') return BLIS_NO_TRANSPOSE;
+    if (tran == 'T' || tran == 't') return BLIS_TRANSPOSE;
+    if (tran == 'C' || tran == 'c') return BLIS_CONJ_TRANSPOSE;
+    return BLIS_NO_TRANSPOSE;
+}
+
 CBLAS_TRANSPOSE ToCblasOp (const char tran) {
 	if (tran == 'N' || tran == 'n') return CblasNoTrans;
 	if (tran == 'T' || tran == 't') return CblasTrans;

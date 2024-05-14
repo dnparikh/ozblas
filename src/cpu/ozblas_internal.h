@@ -22,6 +22,7 @@ char FromCublasOp (CBLAS_TRANSPOSE tran);
 cublasOperation_t ToCublasOp (const char tran);
 #endif
 
+trans_t ToblisOp (const char tran);
 //=============================================
 // ozblas_XXX
 //=============================================

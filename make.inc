@@ -2,7 +2,7 @@
 
 #--- System ----------------------------------
 #CPU_ARCH: KNL, ICELAKE, SKYLAKE, ARM
-CPU_ARCH =
+CPU_ARCH = 
 # -> If specified, compile with architecture-specific options
 
 #LINKAGE: static, dynamic
@@ -11,8 +11,8 @@ LINKAGE = static
 #--- PATH ------------------------------------
 #CUDA_PATH	= /work/opt/local/x86_64/cores/cuda/12.0
 CUDA_PATH	= /usr/local/cuda-12.0
-LIB_PATH	= $(HOME)/local/lib
-INC_PATH	= $(HOME)/local/include
+LIB_PATH	= -L$(HOME)/lib/libblis/lib -L$(HOME)/lib/libmplapack/lib
+INC_PATH	= -I$(HOME)/lib/libblis/include -I$(HOME)/lib/libmplapack/include
 # -> installation path of external libraries
 
 #--- Compiler --------------------------------
@@ -22,12 +22,12 @@ CXX = g++
 
 #--- CPU (OzBLAS) / CUDA (cuOzBLAS) ----------
 CPU  = yes
-CUDA = yes
+CUDA = no
 # CPU must be yes also for CUDA
 
 #--- BLAS (CPU) ------------------------------
 #CPU_BLAS: MKL, OpenBLAS, SSL2
-CPU_BLAS = MKL
+CPU_BLAS = OpenBLAS
 # CSRMV & CG require MKL because OpenBLAS does not have sparse routines.
 
 #--- MPLAPACK (for testing) ------------------
@@ -71,14 +71,14 @@ AXPY = yes
 
 # level-2
 GEMV = yes
-CSRMV = yes
+CSRMV = no
 # -> CSRMV requires MKL on CPUs
 
 # level-3
 GEMM = yes
 
 # solver
-CG = yes
+CG = no
 # -> CG requires CSRMV, DOT, NRM2, and AXPY
 
 ##############################################

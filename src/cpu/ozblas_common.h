@@ -23,6 +23,7 @@
 #include <mkl_spblas.h>
 #else
 #include <cblas.h>
+#include <blis.h>
 #endif
 
 #include <omp.h>

@@ -851,7 +851,8 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const fl
 	fprintf (OUTPUT, "OzBLAS error: omatcopy is not available.\n");
 	exit(1);
 	#else
-	cblas_somatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
+	//cblas_somatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
+	bli_scopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A, 1, lda, B, 1, ldb);
 	#endif
 }
 
@@ -862,8 +863,9 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const do
 	fprintf (OUTPUT, "OzBLAS error: omatcopy is not available.\n");
 	exit(1);
 	#else
-	cblas_domatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
-	#endif
+	//cblas_domatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
+	bli_dcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A, 1, lda, B, 1, ldb);
+    #endif
 }
 
 #include <complex>
@@ -878,7 +880,8 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const __
 	exit(1);
 	#else
 	const double done = 1.;
-	cblas_zomatcopy (CblasColMajor, ToCblasOp(trans), m, n, &done, (const double*)A, lda, (double*)B, ldb);
+	//cblas_zomatcopy (CblasColMajor, ToCblasOp(trans), m, n, &done, (const double*)A, lda, (double*)B, ldb);
+	bli_zcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, (const dcomplex*) A, 1, lda, (dcomplex *) B, 1, ldb);
 	#endif
 }
 

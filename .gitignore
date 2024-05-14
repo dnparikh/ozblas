@@ -1,0 +1,58 @@
+# -- generic files to ignore --
+
+# emacs backup files
+*~
+# vim backup files
+*.swp
+# NFS file
+.nfs*
+
+# -- compiler-related --
+
+# object files
+# NOTE: This will result in git also exluding the top-level obj directory
+# since its only contents are .o files.
+*.o
+*.d
+# static library archives
+# NOTE: This will result in git also exluding the top-level lib directory
+# since its only contents are .a files.
+*.a
+*.so
+*.so.*
+# test executables
+*.x
+*.pexe
+*.nexe
+*.js
+# link map files
+*.map
+
+# -- makefile fragments --
+path.mk
+
+# -- misc. --
+
+# obj Folder
+obj/
+
+# lib Folder
+lib/
+
+
+# Ozblas testing exectuables
+testing/*
+!testing/*.*
+testing/*.d
+
+# BLAS test output files
+out.*
+
+# GTAGS database
+GPATH
+GRTAGS
+GTAGS
+
+# Mac DS.store files
+.DS_Store
+.vscode
