@@ -1,5 +1,8 @@
 #include "ozblas_common.h"
 
+#define log2 log2q
+#define ceil ceilq
+
 // =========================================
 // Split
 // Based on K.Ozaki et al., "Error-free transformations of matrix multiplication

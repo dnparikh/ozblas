@@ -26,7 +26,7 @@ endif
 	# Warning 1: fprotect-parens MUST be used (g++ enables it in default)
 	# Warning 2: fp-model source MUST be used (disable 80-bit register)
 ifeq ($(CXX),g++)
-	FLAGS += -fopenmp 
+	FLAGS += -fopenmp -lstdc
 ifeq ($(CPU_ARCH),SKYLAKE)
 	FLAGS += -march=skylake
 endif
@@ -89,7 +89,7 @@ ozblas_common.h \
 ozblas_internal.h 
 
 #ifeq ($(GEMM),yes) // common
-ALLSRC += ozblas_gemm.cpp 
+ALLSRC += ozblas_gemm.cpp ozCblas_gemm.cpp
 #endif
 ifeq ($(AXPY),yes)
 ALLSRC += ozblas_axpy.cpp 
@@ -114,6 +114,9 @@ ALLSRC += ozblas_cg.cpp
 endif
 
 ALLOBJ += $(ALLSRC:.cpp=.o)
+
+$(info source objs  $(ALLOBJ))
+
 
 $(ALLOBJ) : $(ALLHDR)
 

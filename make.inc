@@ -12,7 +12,7 @@ LINKAGE = static
 #CUDA_PATH	= /work/opt/local/x86_64/cores/cuda/12.0
 CUDA_PATH	= /usr/local/cuda-12.0
 LIB_PATH	= -L$(HOME)/lib/libblis/lib -L$(HOME)/lib/libmplapack/lib
-INC_PATH	= -I$(HOME)/lib/libblis/include -I$(HOME)/lib/libmplapack/include
+INC_PATH	= -I$(HOME)/lib/libblis/include -I$(HOME)/lib/libmplapack/include/mplapack -I$(HOME)/lib/libmplapack/include
 # -> installation path of external libraries
 
 #--- Compiler --------------------------------
@@ -31,7 +31,7 @@ CPU_BLAS = OpenBLAS
 # CSRMV & CG require MKL because OpenBLAS does not have sparse routines.
 
 #--- MPLAPACK (for testing) ------------------
-MPLAPACK = yes
+MPLAPACK = no
 # -> yes or no. 'yes' uses MPLAPACK for verifying computational result
 # -> If no, binary128 (PREC_Q_D and PREC_Q_S) cannot be used.
 # MPLAPACK does not work with SSL2 on Fugaku
@@ -57,20 +57,20 @@ CC86 = no
 # PREC_X_Y: X is I/O-precision, Y is compute-precision
 # Q: FP128, D: FP64, S: FP32
 PREC_Q_D = yes
-PREC_Q_S = yes
-PREC_D_D = yes
-PREC_D_S = yes
-PREC_S_S = yes
-PREC_S_D = yes
+PREC_Q_S = no
+PREC_D_D = no
+PREC_D_S = no
+PREC_S_S = no
+PREC_S_D = no
 
 #--- Routine ---------------------------------
 # level-1
-DOT = yes
-NRM2 = yes
-AXPY = yes
+DOT = no
+NRM2 = no
+AXPY = no
 
 # level-2
-GEMV = yes
+GEMV = no
 CSRMV = no
 # -> CSRMV requires MKL on CPUs
 

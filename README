@@ -1,3 +1,13 @@
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Modfications made by dnparikh.
+
+This will make both the ozblas library and test routines for gemm
+Build: `make default`
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 OzBLAS 1.5 alpha 
 September 7, 2023
 Daichi Mukunoki, Takeshi Ogita, Katsuhisa Ozaki, Toshiyuki Imamura
