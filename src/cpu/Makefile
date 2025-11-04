@@ -1,7 +1,7 @@
 # Makefile
 include ../../make.inc
 
-AR		= ar
+AR		= gcc-ar-8
 LIB		:= ../../lib/libozblas.a
 ifneq ($(CXX),FCC)
 FLAGS	:= -Wall -Wno-maybe-uninitialized

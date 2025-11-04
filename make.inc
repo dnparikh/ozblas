@@ -11,8 +11,8 @@ LINKAGE = static
 #--- PATH ------------------------------------
 #CUDA_PATH	= /work/opt/local/x86_64/cores/cuda/12.0
 CUDA_PATH	= /usr/local/cuda-12.0
-LIB_PATH	= -L$(HOME)/lib/libblis/lib -L$(HOME)/lib/libmplapack/lib
-INC_PATH	= -I$(HOME)/lib/libblis/include -I$(HOME)/lib/libmplapack/include/mplapack -I$(HOME)/lib/libmplapack/include
+LIB_PATH	= -L$(HOME)/blis_old/lib -L$(HOME)/lib/libmplapack/lib
+INC_PATH	= -I$(HOME)/blis_old/include/blis -I$(HOME)/lib/libmplapack/include/mplapack -I$(HOME)/lib/libmplapack/include
 # -> installation path of external libraries
 
 #--- Compiler --------------------------------

@@ -852,7 +852,8 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const fl
 	exit(1);
 	#else
 	//cblas_somatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
-	bli_scopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A, 1, lda, B, 1, ldb);
+	float* A_temp = const_cast<float*> (A); 
+	bli_scopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A_temp, 1, lda, B, 1, ldb);
 	#endif
 }
 
@@ -864,7 +865,8 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const do
 	exit(1);
 	#else
 	//cblas_domatcopy (CblasColMajor, ToCblasOp(trans), m, n, 1., A, lda, B, ldb);
-	bli_dcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A, 1, lda, B, 1, ldb);
+	double* A_temp = const_cast<double*> (A); 
+	bli_dcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, A_temp, 1, lda, B, 1, ldb);
     #endif
 }
 
@@ -881,7 +883,7 @@ void blasRomatcopy (const char trans, const int32_t m, const int32_t n, const __
 	#else
 	const double done = 1.;
 	//cblas_zomatcopy (CblasColMajor, ToCblasOp(trans), m, n, &done, (const double*)A, lda, (double*)B, ldb);
-	bli_zcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, (const dcomplex*) A, 1, lda, (dcomplex *) B, 1, ldb);
+	bli_zcopym( 0, BLIS_NONUNIT_DIAG, BLIS_DENSE, ToblisOp(trans), m, n, (dcomplex*) A, 1, lda, (dcomplex *) B, 1, ldb);
 	#endif
 }
 
