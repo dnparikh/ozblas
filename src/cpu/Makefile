@@ -1,8 +1,8 @@
 # Makefile
 include ../../make.inc
 
-AR		= gcc-ar-8
-LIB		:= ../../lib/libozblas.a
+AR		= gcc-ar
+LIB		:= $(OZBLAS_INSTALL_PREFIX)/libozblas.a
 ifneq ($(CXX),FCC)
 FLAGS	:= -Wall -Wno-maybe-uninitialized
 endif

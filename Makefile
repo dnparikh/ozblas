@@ -18,3 +18,7 @@ clean:
 	@for subdir in $(MAKE_DIRS) ; do \
 		(cd $$subdir && $(MAKE) clean) ;\
 	done
+
+
+install:
+	cp -r include $(OZBLAS_INSTALL_PREFIX)

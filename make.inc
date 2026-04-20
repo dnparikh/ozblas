@@ -11,10 +11,13 @@ LINKAGE = static
 #--- PATH ------------------------------------
 #CUDA_PATH	= /work/opt/local/x86_64/cores/cuda/12.0
 CUDA_PATH	= /usr/local/cuda-12.0
-LIB_PATH	= -L$(HOME)/blis_old/lib -L$(HOME)/lib/libmplapack/lib
-INC_PATH	= -I$(HOME)/blis_old/include/blis -I$(HOME)/lib/libmplapack/include/mplapack -I$(HOME)/lib/libmplapack/include
-# -> installation path of external libraries
+LIB_PATH	= -L$(HOME)/lib/blis_ddgemm/lib -L$(HOME)/lib/libmplapack/lib
+INC_PATH	= -I$(HOME)/lib/blis_ddgemm/include/blis -I$(HOME)/lib/libmplapack/include/mplapack -I$(HOME)/lib/libmplapack/include
 
+#--- Install prefix path for ozblas
+OZBLAS_INSTALL_PREFIX=$(HOME)/lib/ozblas/
+
+# -> installation path of external libraries
 #--- Compiler --------------------------------
 CXX = g++
 # -> Intel Compiler (icpc) should work (but not tested)

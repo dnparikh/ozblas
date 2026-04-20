@@ -2,8 +2,19 @@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Modfications made by dnparikh.
 
+Edit make.inc so that LIB_PATH includes the path where BLIS (CBLAS must be
+enabled) is installed. Edit INC_PATH accordingly. Also edit
+OZBLAS_INSTALL_PREFIX to your preferred location where ozblas should be
+installed. 
+
 This will make both the ozblas library and test routines for gemm
 Build: `make default`
+
+`make default` will copy the libozblas.a to the path specified in the
+OZBLAS_INSTALL_PREFIX above. 
+
+Run `make install` to copy the header files to the appropriate location. 
+
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -397,7 +397,7 @@ endif
 
 default: $(OBJS)
 ifeq ($(CPU),yes)
-$(OBJS): ../lib/libozblas.a
+$(OBJS): $(OZBLAS_INSTALL_PREFIX)/libozblas.a
 endif
 ifeq ($(CUDA),yes)
 $(OBJS): ../lib/libcuozblas.a
